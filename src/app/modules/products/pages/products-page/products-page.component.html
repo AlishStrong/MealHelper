@@ -1,1 +1,29 @@
 <p>products-page works!</p>
+<form [formGroup]="productForm" (ngSubmit)="addNewProduct()">
+    <label>
+        Product name
+        <input type="text" name="" id="" formControlName="name">
+    </label>
+    <label>
+        Brand
+        <input type="text" name="" id="" formControlName="brand">
+    </label>
+    <label>
+        Calories per 100 gram
+        <input type="number" name="" id="" formControlName="caloriePer100gr">
+    </label>
+    <label>
+        Protein per 100 gram
+        <input type="number" name="" id="" formControlName="proteinPer100gr">
+    </label>
+    <label>
+        Carbohydrates per 100 gram
+        <input type="number" name="" id="" formControlName="carbohydratesPer100gr">
+    </label>
+    <label>
+        Fat per 100 gram
+        <input type="number" name="" id="" formControlName="fatPer100gr">
+    </label>
+    <button type="submit" [disabled]="!productForm.valid">Add</button>
+    {{productForm.valid}}
+</form>
