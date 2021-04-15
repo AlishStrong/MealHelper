@@ -1,29 +1,31 @@
 <p>products-page works!</p>
 <form [formGroup]="productForm" (ngSubmit)="addNewProduct()">
-    <label>
-        Product name
-        <input type="text" name="" id="" formControlName="name">
-    </label>
-    <label>
-        Brand
-        <input type="text" name="" id="" formControlName="brand">
-    </label>
-    <label>
-        Calories per 100 gram
-        <input type="number" name="" id="" formControlName="caloriePer100gr">
-    </label>
-    <label>
-        Protein per 100 gram
-        <input type="number" name="" id="" formControlName="proteinPer100gr">
-    </label>
-    <label>
-        Carbohydrates per 100 gram
-        <input type="number" name="" id="" formControlName="carbohydratesPer100gr">
-    </label>
-    <label>
-        Fat per 100 gram
-        <input type="number" name="" id="" formControlName="fatPer100gr">
-    </label>
+    <fieldset>
+        <legend>Add new product</legend>
+    <label for="nameControl">Product name</label><br>
+    <input type="text" name="name" id="nameControl" formControlName="name"><br>
+
+    <label for="brandControl">Brand</label><br>
+    <input type="text" name="brand" id="brandControl" formControlName="brand"><br>
+    <br>
+
+    <fieldset>
+        <legend>Nutrition info</legend>
+        <label for="calorieControl">Calories per 100 gram</label><br>
+        <input type="number" name="caloriePer100gr" id="calorieControl" formControlName="caloriePer100gr"><br>
+
+        <label for="proteinControl">Protein per 100 gram</label><br>
+        <input type="number" name="proteinPer100gr" id="proteinControl" formControlName="proteinPer100gr"><br>
+
+        <label for="carbohydratesControl">Carbohydrates per 100 gram</label><br>
+        <input type="number" name="carbohydratesPer100gr" id="carbohydratesControl"
+            formControlName="carbohydratesPer100gr"><br>
+
+        <label for="fatControl">Fat per 100 gram</label><br>
+        <input type="number" name="fatPer100gr" id="fatControl" formControlName="fatPer100gr"><br>
+    </fieldset>
+    <br>
+
     <button type="submit" [disabled]="!productForm.valid">Add</button>
-    {{productForm.valid}}
+</fieldset>
 </form>
