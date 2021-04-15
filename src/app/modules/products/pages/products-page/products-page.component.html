@@ -1,6 +1,3 @@
 <p>products-page works!</p>
-<input type="text" [(ngModel)]="searchItem" placeholder="Search products..">
-<ul *ngFor="let data of dataset | filterSearch: searchItem">
-    <li (click)="selectProduct(data)">{{data}}</li>
-</ul>
+<app-search-product></app-search-product>
 <app-add-product></app-add-product>
