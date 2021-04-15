@@ -3,3 +3,9 @@
 <ul *ngFor="let data of dataset | filterSearch: searchItem">
     <li (click)="selectProduct(data)">{{data}}</li>
 </ul>
+
+<br><br>
+<input type="text" [formControl]="reactiveSearch" placeholder="reactiveSearch..">
+<ul *ngFor="let data of reactiveDataset | async">
+    <li (click)="selectProduct(data)">{{data}}</li>
+</ul>
