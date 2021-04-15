@@ -8,22 +8,9 @@ import { Product } from 'src/app/shared/models/product.model';
   styleUrls: ['./products-page.component.css']
 })
 export class ProductsPageComponent implements OnInit {
-  productForm = new FormGroup({
-    name: new FormControl('', Validators.required),
-    brand: new FormControl('', Validators.required),
-    caloriePer100gr: new FormControl(0, [Validators.required, Validators.min(0)]),
-    proteinPer100gr: new FormControl(0, [Validators.max(100), Validators.min(0)]),
-    carbohydratesPer100gr: new FormControl(0, [Validators.max(100), Validators.min(0)]),
-    fatPer100gr: new FormControl(0, [Validators.max(100), Validators.min(0)])
-  });
 
   constructor() { }
 
   ngOnInit() {
-  }
-
-  addNewProduct(): void {
-    let newProduct = Product.fromFormGroupValue(this.productForm.value);
-    console.log(newProduct);
   }
 }
