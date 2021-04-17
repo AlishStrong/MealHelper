@@ -1,6 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, forkJoin, iif, Observable, of, Subject } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
+import { Product } from 'src/app/shared/models/product.model';
 
 @Component({
   selector: 'app-search-product',
@@ -9,25 +12,33 @@ import { BehaviorSubject, Subject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchProductComponent implements OnInit {
-  dataset = ['MDB', 'Angular', 'Bootstrap', 'Framework', 'SPA', 'React', 'Vue'];
-  searchItem: string;
-  
-  reactiveSearch = new FormControl('');
-  reactiveDataset = new Subject<string[]>();
-  constructor() { }
+  private readonly _productsJSON = 'assets/products-mock.json';
+  products$: Observable<Product[]>;  
+  searchWord$ = new FormControl('');
+
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.reactiveSearch.valueChanges.subscribe(this.imitateServerRequest());
+    this.products$ = this.searchWord$.valueChanges.pipe(
+      switchMap((searchWord: string) => iif(
+          () => !!searchWord.trim(), 
+          this.findProducts(searchWord), 
+          of(new Array<Product>())
+        )
+      )
+    )
   }
 
-  selectProduct($event): void {
-    console.log(`You selected ${$event}`);
+  selectProduct(product: Product): void {
+    console.log(`You selected ${product.name}`);
   }
 
-  private imitateServerRequest(): (value: any) => void {
-    return (toFind: string) => {
-      console.log(`Requesting for ${toFind}`);
-      this.reactiveDataset.next(toFind ? this.dataset.filter((item: string) => item.toLocaleLowerCase().includes(toFind.toLocaleLowerCase())) : []);
-    };
+  private findProducts(searchWord: string) {
+    return this.http.get<Product[]>(this._productsJSON).pipe(
+      map(products => products.filter(
+          (product: Product) => product.name.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase())
+        )
+      )
+    );
   }
 }

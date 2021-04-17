@@ -1,11 +1,5 @@
 <p>search-product works!</p>
-<input type="text" [(ngModel)]="searchItem" placeholder="Search products..">
-<ul *ngFor="let data of dataset | filterSearch: searchItem">
-    <li (click)="selectProduct(data)">{{data}}</li>
-</ul>
-
-<br><br>
-<input type="text" [formControl]="reactiveSearch" placeholder="reactiveSearch..">
-<ul *ngFor="let data of reactiveDataset | async">
-    <li (click)="selectProduct(data)">{{data}}</li>
+<input type="text" [formControl]="searchWord$" placeholder="reactiveSearch..">
+<ul *ngFor="let data of products$ | async">
+    <li (click)="selectProduct(data)">{{data.brand ? data.name + ', ' + data.brand : data.name}}</li>
 </ul>
