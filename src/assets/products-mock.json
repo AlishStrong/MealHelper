@@ -1,0 +1,210 @@
+[
+    {
+        "name": "Onion",
+        "brand": "Kotimaista",
+        "caloriePer100gr": 29,
+        "proteinPer100gr": 1.2,
+        "carbohydratesPer100gr": 4.8,
+        "fatPer100gr": 0.1
+    },
+    {
+        "name": "Potato",
+        "brand": "Kotimaista",
+        "caloriePer100gr": 80,
+        "proteinPer100gr": 2,
+        "carbohydratesPer100gr": 17.4,
+        "fatPer100gr": 0.1
+    },
+    {
+        "name": "Carrot",
+        "brand": "Pirkka",
+        "caloriePer100gr": 33,
+        "proteinPer100gr": 0.6,
+        "carbohydratesPer100gr": 5.6,
+        "fatPer100gr": 0.2
+    },
+    {
+        "name": "Cherry tomatoe",
+        "brand": "Pirkka",
+        "caloriePer100gr": 23,
+        "proteinPer100gr": 0.6,
+        "carbohydratesPer100gr": 3.5,
+        "fatPer100gr": 0.3
+    },
+    {
+        "name": "Cucumber",
+        "brand": "Fineli",
+        "caloriePer100gr": 11,
+        "proteinPer100gr": 0.56,
+        "carbohydratesPer100gr": 1.4,
+        "fatPer100gr": 0.06
+    },
+    {
+        "name": "Lettuce",
+        "brand": "Pirkka",
+        "caloriePer100gr": 15,
+        "proteinPer100gr": 1.1,
+        "carbohydratesPer100gr": 1,
+        "fatPer100gr": 0.2
+    },
+    {
+        "name": "Olive oil",
+        "brand": "Pirkka",
+        "caloriePer100gr": 900,
+        "proteinPer100gr": 0,
+        "carbohydratesPer100gr": 0,
+        "fatPer100gr": 100
+    },
+    {
+        "name": "Sunflower oil",
+        "brand": "Keiju",
+        "caloriePer100gr": 900,
+        "proteinPer100gr": 0,
+        "carbohydratesPer100gr": 0,
+        "fatPer100gr": 100
+    },
+    {
+        "name": "Mozarella cheese",
+        "brand": "Pirkka",
+        "caloriePer100gr": 248,
+        "proteinPer100gr": 18,
+        "carbohydratesPer100gr": 1.5,
+        "fatPer100gr": 19
+    },
+    {
+        "name": "Feta cheese",
+        "brand": "Filos",
+        "caloriePer100gr": 276,
+        "proteinPer100gr": 17,
+        "carbohydratesPer100gr": 0.7,
+        "fatPer100gr": 23
+    },
+    {
+        "name": "Whole chicken with herbs and spices",
+        "brand": "Jyväbroiler",
+        "caloriePer100gr": 165,
+        "proteinPer100gr": 16,
+        "carbohydratesPer100gr": 0.7,
+        "fatPer100gr": 11
+    },
+    {
+        "name": "Chicken breast",
+        "brand": "Maukas",
+        "caloriePer100gr": 112,
+        "proteinPer100gr": 23,
+        "carbohydratesPer100gr": 0.9,
+        "fatPer100gr": 1.8
+    },
+    {
+        "name": "Salmon",
+        "brand": "Leroy",
+        "caloriePer100gr": 224,
+        "proteinPer100gr": 20,
+        "carbohydratesPer100gr": 0,
+        "fatPer100gr": 16
+    },
+    {
+        "name": "Beef minced meat",
+        "brand": "Atria",
+        "caloriePer100gr": 168,
+        "proteinPer100gr": 20,
+        "carbohydratesPer100gr": 0,
+        "fatPer100gr": 10
+    },
+    {
+        "name": "Inner beef filee",
+        "brand": "Atria",
+        "caloriePer100gr": 111,
+        "proteinPer100gr": 22,
+        "carbohydratesPer100gr": 0,
+        "fatPer100gr": 2.5
+    },
+    {
+        "name": "Red paprika",
+        "brand": "",
+        "caloriePer100gr": 23,
+        "proteinPer100gr": 0.56,
+        "carbohydratesPer100gr": 3.45,
+        "fatPer100gr": 0.3
+    },
+    {
+        "name": "Spaghetti",
+        "brand": "Barilla",
+        "caloriePer100gr": 359,
+        "proteinPer100gr": 12.8,
+        "carbohydratesPer100gr": 70.9,
+        "fatPer100gr": 2
+    },
+    {
+        "name": "Arrabbiata sauce",
+        "brand": "Barilla",
+        "caloriePer100gr": 58,
+        "proteinPer100gr": 1.4,
+        "carbohydratesPer100gr": 5.2,
+        "fatPer100gr": 3.1
+    },
+    {
+        "name": "Egg",
+        "brand": "Pirkka",
+        "caloriePer100gr": 134,
+        "proteinPer100gr": 12.6,
+        "carbohydratesPer100gr": 0.3,
+        "fatPer100gr": 9.2
+    },
+    {
+        "name": "Rye-bread",
+        "brand": "Oululainen",
+        "caloriePer100gr": 241,
+        "proteinPer100gr": 9.4,
+        "carbohydratesPer100gr": 40,
+        "fatPer100gr": 1.8
+    },
+    {
+        "name": "Peach yoghurt",
+        "brand": "Juustoportti",
+        "caloriePer100gr": 68,
+        "proteinPer100gr": 2.7,
+        "carbohydratesPer100gr": 6.5,
+        "fatPer100gr": 3.5
+    },
+    {
+        "name": "Cottage cheese",
+        "brand": "Valio",
+        "caloriePer100gr": 69,
+        "proteinPer100gr": 13,
+        "carbohydratesPer100gr": 2.1,
+        "fatPer100gr": 1
+    },
+    {
+        "name": "Quark",
+        "brand": "Rainbow",
+        "caloriePer100gr": 69,
+        "proteinPer100gr": 12,
+        "carbohydratesPer100gr": 4,
+        "fatPer100gr": 0.5
+    },
+    {
+        "name": "Apple",
+        "brand": "Pirkka",
+        "caloriePer100gr": 40,
+        "proteinPer100gr": 0.2,
+        "carbohydratesPer100gr": 8.2,
+        "fatPer100gr": 0.1
+    },
+    {
+        "name": "Banana",
+        "brand": "Fairtrade",
+        "caloriePer100gr": 23,
+        "proteinPer100gr": 0.56,
+        "carbohydratesPer100gr": 3.45,
+        "fatPer100gr": 0.3
+    },
+    {
+        "name": "Orange",
+        "brand": "",
+        "caloriePer100gr": 45,
+        "proteinPer100gr": 0.2,
+        "carbohydratesPer100gr": 9.3,
+        "fatPer100gr": 0.01
+    }
+]
