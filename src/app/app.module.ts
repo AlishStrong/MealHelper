@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HomeModule } from './modules/home/home.module';
 import { ProductsModule } from './modules/products/products.module';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { RecipesModule } from './modules/recipes/recipes.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
     BrowserModule,
     AppRoutingModule,
     HomeModule,
-    ProductsModule
+    ProductsModule,
+    RecipesModule
   ],
   providers: [],
   bootstrap: [AppComponent],
