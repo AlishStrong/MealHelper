@@ -1,5 +1,6 @@
 <p>search-product works!</p>
 <input type="text" [formControl]="searchWord$" placeholder="reactiveSearch..">
+<button [routerLink]="['add']">Add</button>
 <ul *ngFor="let data of products$ | async">
     <li (click)="selectProduct(data)">{{data.brand ? data.name + ', ' + data.brand : data.name}}</li>
 </ul>

@@ -62,6 +62,6 @@ export class ProductsPageComponent implements OnInit {
   save(): void {
     console.log(`Want to save`);
     this.edit$.next(false);
-    this.product$ = of(this.editProductForm.value as Product);
+    this.product$ = of(Product.fromFormGroupValue(this.editProductForm.value));
   }
 }
