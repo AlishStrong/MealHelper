@@ -3,7 +3,7 @@ import { Food } from './food.model';
 export class Recipe implements Food {
     constructor(
         public name: string,
-        public ingredients: Food[],
+        public ingredients: Map<string, number>,
         public caloriePer100gr: number,
         public proteinPer100gr = 0,
         public carbohydratesPer100gr = 0,

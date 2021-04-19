@@ -1,1 +1,49 @@
 <p>add-recipe works!</p>
+<form [formGroup]="recipeForm" (ngSubmit)="addNewRecipe()">
+    <fieldset>
+        <legend>Add new recipe</legend>
+        <label for="nameControl">Recipe name</label><br>
+        <input type="text" name="name" id="nameControl" formControlName="name"><br>
+
+        <fieldset>
+            <legend>Ingredients</legend>
+            <table>
+                <thead>
+                    <tr>
+                        <td><label for="ingredientName">Name</label></td>
+                        <td><label for="ingredientAmount">Amount</label></td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let ingr of ingredientList | keyvalue">
+                        <td>
+                            {{ingr.key}}
+                        </td>
+                        <td>
+                            {{ingr.value}} g
+                        </td>
+                        <td>
+                            <button type="button" (click)="removeIngredient(ingr.key)">Remove</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" id="ingredientName" formControlName="ingredientName" required>
+                        </td>
+                        <td>
+                            <input type="number" id="ingredientAmount" formControlName="ingredientAmount" min="1" placeholder="g" required>
+                        </td>
+                        <td>
+                            <button type="button" [disabled]="recipeForm.controls.ingredientName.invalid || recipeForm.controls.ingredientAmount.invalid" 
+                            (click)="addIngredient()">Add</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
+        <br>
+
+        <button type="submit" [disabled]="recipeForm.controls.name.invalid || ingredientList.size < 1">Save the recipe</button>
+    </fieldset>
+</form>
