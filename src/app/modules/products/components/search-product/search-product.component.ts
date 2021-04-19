@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, forkJoin, iif, Observable, of, Subject } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { Product } from 'src/app/shared/models/product.model';
@@ -16,7 +17,10 @@ export class SearchProductComponent implements OnInit {
   products$: Observable<Product[]>;  
   searchWord$ = new FormControl('');
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router
+    ) { }
 
   ngOnInit() {
     this.products$ = this.searchWord$.valueChanges.pipe(
@@ -31,6 +35,7 @@ export class SearchProductComponent implements OnInit {
 
   selectProduct(product: Product): void {
     console.log(`You selected ${product.name}`);
+    this.router.navigateByUrl(`products/${product.name}`);
   }
 
   private findProducts(searchWord: string) {

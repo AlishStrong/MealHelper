@@ -1,3 +1,76 @@
-<p>products-page works!</p>
-<app-search-product></app-search-product>
-<app-add-product></app-add-product>
+<div *ngIf="(product$ | async) as product">
+    <!-- Show Product table -->
+    <table *ngIf="!(edit$ | async)">
+        <tbody>
+            <tr>
+                <td>Name</td>
+                <td>{{product.name}}</td>
+            </tr>
+            <tr>
+                <td>Brand</td>
+                <td>{{product.brand}}</td>
+            </tr>
+            <tr>
+                <td>Calories</td>
+                <td>{{product.caloriePer100gr}}</td>
+            </tr>
+            <tr>
+                <td>Protein</td>
+                <td>{{product.proteinPer100gr}}</td>
+            </tr>
+            <tr>
+                <td>Carbs</td>
+                <td>{{product.carbohydratesPer100gr}}</td>
+            </tr>
+            <tr>
+                <td>Fat</td>
+                <td>{{product.fatPer100gr}}</td>
+            </tr>
+            <tr>
+                <td><button (click)="close()">Close</button></td>
+                <td><button (click)="edit()">Edit</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Edit Product table -->
+    <form *ngIf="edit$ | async" [formGroup]="editProductForm" (ngSubmit)="save()">
+        <table>
+            <tbody>
+                <tr>
+                    <td>Name</td>
+                    <td><input type="text" name="name" id="nameControl" formControlName="name"></td>
+                </tr>
+                <tr>
+                    <td>Brand</td>
+                    <td><input type="text" name="brand" id="brandControl" formControlName="brand"></td>
+                </tr>
+                <tr>
+                    <td>Calories</td>
+                    <td><input type="number" min="0" name="caloriePer100gr" id="calorieControl"
+                            formControlName="caloriePer100gr"></td>
+                </tr>
+                <tr>
+                    <td>Protein</td>
+                    <td><input type="number" min="0" name="proteinPer100gr" id="proteinControl"
+                            formControlName="proteinPer100gr"></td>
+                </tr>
+                <tr>
+                    <td>Carbs</td>
+                    <td><input type="number" min="0" name="carbohydratesPer100gr" id="carbohydratesControl"
+                            formControlName="carbohydratesPer100gr"></td>
+                </tr>
+                <tr>
+                    <td>Fat</td>
+                    <td><input type="number" min="0" name="fatPer100gr" id="fatControl" formControlName="fatPer100gr"></td>
+                </tr>
+                <tr>
+                    <td><button (click)="close()">Close</button></td>
+                    <td>
+                        <button type="submit" [disabled]="!editProductForm.valid">Save</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>

@@ -3,30 +3,30 @@
 <form [formGroup]="productForm" (ngSubmit)="addNewProduct()">
     <fieldset>
         <legend>Add new product</legend>
-    <label for="nameControl">Product name</label><br>
-    <input type="text" name="name" id="nameControl" formControlName="name"><br>
+        <label for="nameControl">Product name</label><br>
+        <input type="text" name="name" id="nameControl" formControlName="name"><br>
 
-    <label for="brandControl">Brand</label><br>
-    <input type="text" name="brand" id="brandControl" formControlName="brand"><br>
-    <br>
+        <label for="brandControl">Brand</label><br>
+        <input type="text" name="brand" id="brandControl" formControlName="brand"><br>
+        <br>
 
-    <fieldset>
-        <legend>Nutrition info</legend>
-        <label for="calorieControl">Calories per 100 gram</label><br>
-        <input type="number" name="caloriePer100gr" id="calorieControl" formControlName="caloriePer100gr"><br>
+        <fieldset>
+            <legend>Nutrition info</legend>
+            <label for="calorieControl">Calories per 100 gram</label><br>
+            <input type="number" min="0" name="caloriePer100gr" id="calorieControl" formControlName="caloriePer100gr"><br>
 
-        <label for="proteinControl">Protein per 100 gram</label><br>
-        <input type="number" name="proteinPer100gr" id="proteinControl" formControlName="proteinPer100gr"><br>
+            <label for="proteinControl">Protein per 100 gram</label><br>
+            <input type="number" min="0" name="proteinPer100gr" id="proteinControl" formControlName="proteinPer100gr"><br>
 
-        <label for="carbohydratesControl">Carbohydrates per 100 gram</label><br>
-        <input type="number" name="carbohydratesPer100gr" id="carbohydratesControl"
-            formControlName="carbohydratesPer100gr"><br>
+            <label for="carbohydratesControl">Carbohydrates per 100 gram</label><br>
+            <input type="number" min="0" name="carbohydratesPer100gr" id="carbohydratesControl"
+                formControlName="carbohydratesPer100gr"><br>
 
-        <label for="fatControl">Fat per 100 gram</label><br>
-        <input type="number" name="fatPer100gr" id="fatControl" formControlName="fatPer100gr"><br>
+            <label for="fatControl">Fat per 100 gram</label><br>
+            <input type="number" min="0" name="fatPer100gr" id="fatControl" formControlName="fatPer100gr"><br>
+        </fieldset>
+        <br>
+
+        <button type="submit" [disabled]="!productForm.valid">Add</button>
     </fieldset>
-    <br>
-
-    <button type="submit" [disabled]="!productForm.valid">Add</button>
-</fieldset>
 </form>
