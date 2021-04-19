@@ -27,11 +27,10 @@ export class ProductsPageComponent implements OnInit {
 
   ngOnInit() {
     this.product$ = this.route.paramMap.pipe(
-      map((map: ParamMap) => map.get('productName')),
+      map((pMap: ParamMap) => pMap.get('productName')),
       switchMap((productName: string) => {
         return this.http.get<Product[]>(this._productsJSON).pipe(
           map((products: Product[]) => {
-            console.log('inside');
             return products.find((product: Product) => product.name === productName);
           }),
           tap((p: Product) => {

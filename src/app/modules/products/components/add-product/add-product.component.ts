@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Product } from 'src/app/shared/models/product.model';
 
 @Component({
@@ -19,11 +20,19 @@ export class AddProductComponent implements OnInit {
     fatPer100gr: new FormControl(0, [Validators.max(100), Validators.min(0)])
   });
 
+  constructor(
+    private router: Router
+  ) { }
+
   ngOnInit() {
   }
 
   addNewProduct(): void {
-    let newProduct = Product.fromFormGroupValue(this.productForm.value);
+    const newProduct = Product.fromFormGroupValue(this.productForm.value);
     console.log(newProduct);
+  }
+
+  cancel(): void {
+    this.router.navigateByUrl('products');
   }
 }
