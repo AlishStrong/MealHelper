@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Food } from 'src/app/shared/models/food.model';
 import { Product } from 'src/app/shared/models/product.model';
-import { Recipe } from 'src/app/shared/models/recipe.model';
+import { Ingredient, Ingredients, Recipe } from 'src/app/shared/models/recipe.model';
 
 @Component({
   selector: 'app-add-recipe',
@@ -29,7 +29,8 @@ export class AddRecipeComponent implements OnInit {
       fatPer100gr: 0.01
     }
   ];
-  ingredientList = new Map<string, number>();
+
+  ingredientList: Ingredients = new Array<Ingredient>();
 
   recipeForm = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -53,15 +54,15 @@ export class AddRecipeComponent implements OnInit {
   }
 
   removeIngredient(ingredientName: string): void {
-    this.ingredientList.delete(ingredientName);
+    // this.ingredientList.delete(ingredientName);
   }
 
   addIngredient(): void {
-    this.ingredientList.set(
-      this.recipeForm.controls.ingredientName.value,
-      this.recipeForm.controls.ingredientAmount.value,
-    );
-    this.recipeForm.controls.ingredientName.reset();
-    this.recipeForm.controls.ingredientAmount.reset();
+    // this.ingredientList.set(
+    //   this.recipeForm.controls.ingredientName.value,
+    //   this.recipeForm.controls.ingredientAmount.value,
+    // );
+    // this.recipeForm.controls.ingredientName.reset();
+    // this.recipeForm.controls.ingredientAmount.reset();
   }
 }

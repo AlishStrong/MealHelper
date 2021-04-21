@@ -1,9 +1,17 @@
 import { Food } from './food.model';
 
+export interface Ingredient {
+    name: string;
+    brand?: string;
+    amount: number;
+}
+
+export interface Ingredients extends Array<Ingredient> {}
+
 export class Recipe implements Food {
     constructor(
         public name: string,
-        public ingredients: Map<string, number>,
+        public ingredients: Ingredients,
         public caloriePer100gr: number,
         public proteinPer100gr = 0,
         public carbohydratesPer100gr = 0,

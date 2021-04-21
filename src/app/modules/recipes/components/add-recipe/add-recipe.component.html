@@ -21,7 +21,7 @@
                             {{ingr.key}}
                         </td>
                         <td>
-                            {{ingr.value}} g
+                            {{ingr.value.amount}} g
                         </td>
                         <td>
                             <button type="button" (click)="removeIngredient(ingr.key)">Remove</button>
@@ -44,6 +44,6 @@
         </fieldset>
         <br>
 
-        <button type="submit" [disabled]="recipeForm.controls.name.invalid || ingredientList.size < 1">Save the recipe</button>
+        <button type="submit" [disabled]="recipeForm.controls.name.invalid || ingredientList.length < 1">Save the recipe</button>
     </fieldset>
 </form>
