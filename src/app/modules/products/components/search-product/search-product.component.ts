@@ -14,7 +14,7 @@ import { Product } from 'src/app/shared/models/product.model';
 })
 export class SearchProductComponent implements OnInit {
   private readonly _productsJSON = 'assets/products-mock.json';
-  products$: Observable<Product[]>;  
+  products$: Observable<Product[]>;
   searchWord$ = new FormControl('');
 
   constructor(
@@ -25,12 +25,12 @@ export class SearchProductComponent implements OnInit {
   ngOnInit() {
     this.products$ = this.searchWord$.valueChanges.pipe(
       switchMap((searchWord: string) => iif(
-          () => !!searchWord.trim(), 
-          this.findProducts(searchWord), 
+          () => !!searchWord.trim(),
+          this.findProducts(searchWord),
           of(new Array<Product>())
         )
       )
-    )
+    );
   }
 
   selectProduct(product: Product): void {

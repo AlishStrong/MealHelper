@@ -29,16 +29,27 @@
                     </tr>
                     <tr>
                         <td>
-                            <input type="text" id="ingredientName" formControlName="ingredientName" required>
+                            <input type="search" autocomplete="off" id="ingredientName" formControlName="ingredientName" placeholder="search product...">
+                            <!-- <ul *ngFor="let data of products$ | async">
+                                <li (click)="selectProduct(data)">{{data.brand ? data.name + ', ' + data.brand : data.name}}</li>
+                            </ul> -->
+                            <!-- <input type="text" id="ingredientName" formControlName="ingredientName" required> -->
                         </td>
                         <td>
-                            <input type="number" id="ingredientAmount" formControlName="ingredientAmount" min="1" placeholder="g" required>
+                            <!-- <input type="number" id="ingredientAmount" formControlName="ingredientAmount" min="1" placeholder="g" required> -->
                         </td>
                         <td>
                             <button type="button" [disabled]="recipeForm.controls.ingredientName.invalid || recipeForm.controls.ingredientAmount.invalid" 
                             (click)="addIngredient()">Add</button>
                         </td>
                     </tr>
+                    {{'Show product list - ' + showProductList}}
+                    {{recipeForm.get('ingredientName').valueChanges | async}}
+                        <tr *ngFor="let data of products$ | async">
+                            <td colspan="3" (click)="selectProduct(data)" *ngIf="showProductList">
+                                {{data.brand ? data.name + ', ' + data.brand : data.name}}
+                            </td>
+                        </tr>
                 </tbody>
             </table>
         </fieldset>
