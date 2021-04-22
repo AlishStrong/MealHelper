@@ -1,54 +1,73 @@
 <p>add-recipe works!</p>
-<form [formGroup]="recipeForm" (ngSubmit)="addNewRecipe()">
+<form [formGroup]="recipeForm"
+      (ngSubmit)="addNewRecipe()">
+  <fieldset>
+    <legend>Add new recipe</legend>
+    <label for="nameControl">Recipe name</label><br>
+    <input type="text"
+           autocomplete="off"
+           name="name"
+           id="nameControl"
+           formControlName="name"><br>
+
     <fieldset>
-        <legend>Add new recipe</legend>
-        <label for="nameControl">Recipe name</label><br>
-        <input type="text" autocomplete="off" name="name" id="nameControl" formControlName="name"><br>
-
-        <fieldset>
-            <legend>Ingredients</legend>
-            <table>
-                <thead>
-                    <tr>
-                        <td><label for="ingredientName">Name</label></td>
-                        <td><label for="ingredientAmount">Amount, g</label></td>
-                        <td></td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let ingr of ingredientList">
-                        <td>
-                            {{ingr.name}}
-                        </td>
-                        <td>
-                            {{ingr.amount}} g
-                        </td>
-                        <td>
-                            <button type="button" (click)="removeIngredient(ingr.name)">Remove</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="search" autocomplete="off" id="ingredientName" formControlName="ingredientName" placeholder="search product...">
-                        </td>
-                        <td>
-                            <input type="number" id="ingredientAmount" formControlName="ingredientAmount" min="1" placeholder="g" required>
-                        </td>
-                        <td>
-                            <button type="button" [disabled]="recipeForm.controls.ingredientName.invalid || recipeForm.controls.ingredientAmount.invalid" 
-                            (click)="addIngredient()">Add</button>
-                        </td>
-                    </tr>
-                        <tr *ngFor="let product of products$ | async">
-                            <td colspan="3" (click)="selectProduct(product)" *ngIf="showProductList">
-                                {{product.brand ? product.name + ', ' + product.brand : product.name}}
-                            </td>
-                        </tr>
-                </tbody>
-            </table>
-        </fieldset>
-        <br>
-
-        <button type="submit" [disabled]="recipeForm.controls.name.invalid || ingredientList.length < 1">Save the recipe</button>
+      <legend>Ingredients</legend>
+      <table>
+        <thead>
+          <tr>
+            <td><label for="ingredientName">Name</label></td>
+            <td><label for="ingredientAmount">Amount, g</label></td>
+            <td></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ingr of ingredientList">
+            <td>
+              {{ingr.name}}
+            </td>
+            <td>
+              {{ingr.amount}} g
+            </td>
+            <td>
+              <button type="button"
+                      (click)="removeIngredient(ingr.name, ingr.brand)">Remove</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="search"
+                     autocomplete="off"
+                     id="ingredientName"
+                     formControlName="ingredientName"
+                     placeholder="search product...">
+            </td>
+            <td>
+              <input type="number"
+                     id="ingredientAmount"
+                     formControlName="ingredientAmount"
+                     min="1"
+                     placeholder="g"
+                     required>
+            </td>
+            <td>
+              <button type="button"
+                      [disabled]="recipeForm.controls.ingredientName.invalid || recipeForm.controls.ingredientAmount.invalid"
+                      (click)="addIngredient()">Add</button>
+            </td>
+          </tr>
+          <tr *ngFor="let product of products$ | async">
+            <td colspan="3"
+                (click)="selectProduct(product)"
+                *ngIf="showProductList">
+              {{product.brand ? product.name + ', ' + product.brand : product.name}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </fieldset>
+    <br>
+
+    <button type="submit"
+            [disabled]="recipeForm.controls.name.invalid || ingredientList.length < 1">Save the recipe</button>
+  </fieldset>
 </form>

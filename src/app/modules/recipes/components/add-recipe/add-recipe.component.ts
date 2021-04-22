@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { iif, Observable, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
+import { Macronutrients } from 'src/app/shared/models/food.model';
 import { Product } from 'src/app/shared/models/product.model';
 import { Ingredient, Ingredients, Recipe } from 'src/app/shared/models/recipe.model';
 
@@ -20,6 +21,7 @@ export class AddRecipeComponent implements OnInit {
   public showProductList = true;
 
   private readonly _productsJSON = 'assets/products-mock.json';
+  private selectedProduct: Product;
 
   constructor(private http: HttpClient) {
     this.recipeForm = new FormGroup({
@@ -43,34 +45,64 @@ export class AddRecipeComponent implements OnInit {
   }
 
   selectProduct(product: Product): void {
+    this.selectedProduct = product;
     this.recipeForm.controls.ingredientName.setValue(product.name);
     this.recipeForm.controls.ingredientBrand.setValue(product.brand);
     this.recipeForm.controls.ingredientAmount.enable({ onlySelf: true });
   }
 
-  // TODO check that ingredient is already in the list or not
-  // TODO update caloric and macro info of the Recipe
   addIngredient(): void {
     this.ingredientList.push({
       name: this.recipeForm.controls.ingredientName.value,
       brand: this.recipeForm.controls.ingredientBrand.value,
-      amount: this.recipeForm.controls.ingredientAmount.value
+      amount: this.recipeForm.controls.ingredientAmount.value,
+      caloriePer100gr: this.selectedProduct.caloriePer100gr,
+      carbohydratesPer100gr: this.selectedProduct.carbohydratesPer100gr,
+      fatPer100gr: this.selectedProduct.fatPer100gr,
+      proteinPer100gr: this.selectedProduct.proteinPer100gr
     });
     this.recipeForm.controls.ingredientName.reset('');
     this.recipeForm.controls.ingredientBrand.reset();
     this.recipeForm.controls.ingredientAmount.reset();
   }
 
-  // TODO use Product as a parameter
-  // TODO update caloric and macro info of the Recipe
-  removeIngredient(ingredientName: string): void {
-    this.ingredientList = this.ingredientList.filter((ingredient: Ingredient) => ingredient.name !== ingredientName);
+  removeIngredient(ingredientName: string, ingredientBrand: string): void {
+    this.ingredientList = this.ingredientList.filter((ingredient: Ingredient) => ingredient.name !== ingredientName && ingredient.brand !== ingredientBrand);
   }
 
-  // TODO clear the form when a Recipe is added
   addNewRecipe(): void {
-    const newRecipe = Recipe.fromFormGroupValue(this.recipeForm.value);
+    const caloriePer100gr = this.calculateCaloriePer100gr();
+    const macros = this.calculateMacronutrients();
+    const newRecipe = Recipe.fromFormGroupValue({ ...this.recipeForm.value, caloriePer100gr, ...macros });
     console.log(newRecipe);
+  }
+
+  private calculateCaloriePer100gr(): number {
+    let totalCalorie = 0;
+    let totalAmount = 0;
+    this.ingredientList.forEach(({ caloriePer100gr, amount }) => {
+      totalCalorie += caloriePer100gr * amount;
+      totalAmount += amount;
+    });
+    return totalCalorie / totalAmount;
+  }
+
+  private calculateMacronutrients(): Macronutrients {
+    let totalProt = 0;
+    let totalCarb = 0;
+    let totalFat = 0;
+    let totalAmount = 0;
+    this.ingredientList.forEach(({ amount, proteinPer100gr, carbohydratesPer100gr, fatPer100gr }) => {
+      totalCarb += carbohydratesPer100gr * amount;
+      totalFat += fatPer100gr * amount;
+      totalProt += proteinPer100gr * amount;
+      totalAmount += amount;
+    });
+    return {
+      carbohydratesPer100gr: totalCarb / totalAmount,
+      fatPer100gr: totalFat / totalAmount,
+      proteinPer100gr: totalProt / totalAmount
+    };
   }
 
   private findProducts(searchWord: string) {
