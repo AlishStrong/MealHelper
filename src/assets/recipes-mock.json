@@ -1,0 +1,94 @@
+[
+  {
+    "name": "Pasta arrabiata",
+    "ingredients": [
+      {
+        "amount": 400,
+        "brand": "Atria",
+        "caloriePer100gr": 168,
+        "carbohydratesPer100gr": 0,
+        "fatPer100gr": 10,
+        "name": "Beef minced meat",
+        "proteinPer100gr": 20
+      },
+      {
+        "amount": 400,
+        "brand": "Barilla",
+        "caloriePer100gr": 58,
+        "carbohydratesPer100gr": 5.2,
+        "fatPer100gr": 3.1,
+        "name": "Arrabbiata sauce",
+        "proteinPer100gr": 1.4
+      },
+      {
+        "amount": 320,
+        "brand": "Barilla",
+        "caloriePer100gr": 359,
+        "carbohydratesPer100gr": 70.9,
+        "fatPer100gr": 2,
+        "name": "Spaghetti",
+        "proteinPer100gr": 12.8
+      }
+    ],
+    "caloriePer100gr": 183.28571428571428,
+    "proteinPer100gr": 11.3,
+    "carbohydratesPer100gr": 22.114285714285714,
+    "fatPer100gr": 5.25,
+    "steps": {}
+  },
+  {
+    "name": "Greek salad",
+    "ingredients": [
+      {
+        "amount": 250,
+        "brand": "Pirkka",
+        "caloriePer100gr": 23,
+        "carbohydratesPer100gr": 3.5,
+        "fatPer100gr": 0.3,
+        "name": "Cherry tomatoe",
+        "proteinPer100gr": 0.6
+      },
+      {
+        "amount": 140,
+        "brand": "Fineli",
+        "caloriePer100gr": 11,
+        "carbohydratesPer100gr": 1.4,
+        "fatPer100gr": 0.06,
+        "name": "Cucumber",
+        "proteinPer100gr": 0.56
+      },
+      {
+        "amount": 100,
+        "brand": "Pirkka",
+        "caloriePer100gr": 15,
+        "carbohydratesPer100gr": 1,
+        "fatPer100gr": 0.2,
+        "name": "Lettuce",
+        "proteinPer100gr": 1.1
+      },
+      {
+        "amount": 150,
+        "brand": "Filos",
+        "caloriePer100gr": 276,
+        "carbohydratesPer100gr": 0.7,
+        "fatPer100gr": 23,
+        "name": "Feta cheese",
+        "proteinPer100gr": 17
+      },
+      {
+        "amount": 10,
+        "brand": "Pirkka",
+        "caloriePer100gr": 900,
+        "carbohydratesPer100gr": 0,
+        "fatPer100gr": 100,
+        "name": "Olive oil",
+        "proteinPer100gr": 0
+      }
+    ],
+    "caloriePer100gr": 91.06153846153846,
+    "proteinPer100gr": 4.443692307692308,
+    "carbohydratesPer100gr": 1.9630769230769232,
+    "fatPer100gr": 7.005230769230769,
+    "steps": {}
+  }
+]

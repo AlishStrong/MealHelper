@@ -1,0 +1,7 @@
+<p>search-recipe works!</p>
+<input type="text"
+       [formControl]="searchWord$"
+       placeholder="search recipe...">
+<ul *ngFor="let data of recipes$ | async">
+  <li (click)="selectRecipe(data)">{{data.name}}</li>
+</ul>

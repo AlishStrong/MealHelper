@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { AddRecipeComponent } from './components/add-recipe/add-recipe.component';
+import { SearchRecipeComponent } from './components/search-recipe/search-recipe.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'add', pathMatch: 'full' },
+  { path: '', component: SearchRecipeComponent },
   { path: 'add', component: AddRecipeComponent }
 ];
 
