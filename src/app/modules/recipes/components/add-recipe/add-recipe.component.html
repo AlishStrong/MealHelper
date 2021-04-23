@@ -69,5 +69,7 @@
 
     <button type="submit"
             [disabled]="recipeForm.controls.name.invalid || ingredientList.length < 1">Save the recipe</button>
+    <button type="button"
+            (click)="cancel()">Cancel</button>
   </fieldset>
 </form>

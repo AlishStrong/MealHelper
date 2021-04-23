@@ -2,6 +2,7 @@
 <input type="text"
        [formControl]="searchWord$"
        placeholder="search recipe...">
+<button [routerLink]="['add']">Add</button>
 <ul *ngFor="let data of recipes$ | async">
   <li (click)="selectRecipe(data)">{{data.name}}</li>
 </ul>

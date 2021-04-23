@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { iif, Observable, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { Macronutrients } from 'src/app/shared/models/food.model';
@@ -23,7 +24,7 @@ export class AddRecipeComponent implements OnInit {
   private readonly _productsJSON = 'assets/products-mock.json';
   private selectedProduct: Product;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.recipeForm = new FormGroup({
       name: new FormControl('', Validators.required),
       ingredients: new FormControl(this.ingredientList, Validators.required),
@@ -78,6 +79,10 @@ export class AddRecipeComponent implements OnInit {
     const macros = this.calculateMacronutrients();
     const newRecipe = Recipe.fromFormGroupValue({ ...this.recipeForm.value, caloriePer100gr, ...macros });
     console.log(newRecipe);
+  }
+
+  cancel(): void {
+    this.router.navigateByUrl('recipes');
   }
 
   private calculateCaloriePer100gr(): number {
