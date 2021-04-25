@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/shared/models/product.model';
@@ -29,6 +29,14 @@ export class AddProductComponent implements OnInit {
 
   addNewProduct(): void {
     const newProduct = Product.fromFormGroupValue(this.productForm.value);
+    this.productForm.reset({
+      name: '',
+      brand: '',
+      caloriePer100gr: 0,
+      proteinPer100gr: 0,
+      carbohydratesPer100gr: 0,
+      fatPer100gr: 0
+    });
     console.log(newProduct);
   }
 

@@ -78,6 +78,14 @@ export class AddRecipeComponent implements OnInit {
     const caloriePer100gr = this.calculateCaloriePer100gr();
     const macros = this.calculateMacronutrients();
     const newRecipe = Recipe.fromFormGroupValue({ ...this.recipeForm.value, caloriePer100gr, ...macros });
+    this.ingredientList = new Array<Ingredient>();
+    this.recipeForm.reset({
+      name: '',
+      ingredients: this.ingredientList,
+      ingredientName: '',
+      ingredientBrand: '',
+      ingredientAmount: null
+    });
     console.log(newRecipe);
   }
 
