@@ -13,9 +13,9 @@ import { Recipe } from 'src/app/shared/models/recipe.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchRecipeComponent implements OnInit {
-  private readonly _recipesJSON = 'assets/recipes-mock.json';
   recipes$: Observable<Recipe[]>;
   searchWord$ = new FormControl('');
+  private readonly _recipesJSON = 'assets/recipes-mock.json';
 
   constructor(private http: HttpClient, private router: Router) { }
 

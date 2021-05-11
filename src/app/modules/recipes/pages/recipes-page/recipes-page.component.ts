@@ -1,7 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
+import { Recipe } from 'src/app/shared/models/recipe.model';
 
 @Component({
   selector: 'app-recipes-page',
@@ -9,15 +11,24 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./recipes-page.component.css']
 })
 export class RecipesPageComponent implements OnInit {
-  public recipesName$: Observable<string>;
+  public recipe$: Observable<Recipe>;
+  private readonly _recipesJSON = 'assets/recipes-mock.json';
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private http: HttpClient
   ) { }
 
   ngOnInit() {
-    this.recipesName$ = this.route.paramMap.pipe(
-      map((rMap: ParamMap) => rMap.get('recipesName'))
+    this.recipe$ = this.route.paramMap.pipe(
+      map((rMap: ParamMap) => rMap.get('recipesName')),
+      switchMap((recipesName: string) => {
+        return this.http.get(this._recipesJSON).pipe(
+          map((recipes: Recipe[]) => {
+            return recipes.find((rec: Recipe) => rec.name === recipesName);
+          })
+        )
+      })
     )
   }
 
