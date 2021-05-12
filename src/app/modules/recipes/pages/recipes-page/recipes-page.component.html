@@ -1,2 +1,37 @@
 <p>recipes-page works!</p>
+<div *ngIf="(recipe$ | async) as recipe">
+  <!-- Show Recipe table -->
+  <table *ngIf="!(edit$ | async)">
+    <tbody>
+      <tr>
+        <td>Name</td>
+        <td>{{recipe.name}}</td>
+      </tr>
+      <tr>
+        <td><button (click)="close()">Close</button></td>
+        <td><button (click)="edit()">Edit</button></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <!-- Edit Recipe table -->
+  <form *ngIf="edit$ | async" [formGroup]="editRecipeForm" (ngSubmit)="save()">
+    <table>
+      <tbody>
+        <tr>
+          <td>Name</td>
+          <td><input type="text" name="name" id="nameControl" formControlName="name"></td>
+        </tr>
+        <tr>
+          <td><button (click)="close()">Close</button></td>
+          <td>
+              <button type="submit" [disabled]="!editRecipeForm.valid">Save</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+</div>
+
+<br><br>
 {{ recipe$ | async | json }}
