@@ -2,9 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, iif, Observable, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
-import { Recipe } from 'src/app/shared/models/recipe.model';
+import { Macronutrients } from 'src/app/shared/models/food.model';
+import { Product } from 'src/app/shared/models/product.model';
+import { Ingredient, Ingredients, Recipe } from 'src/app/shared/models/recipe.model';
 
 @Component({
   selector: 'app-recipes-page',
@@ -12,10 +14,15 @@ import { Recipe } from 'src/app/shared/models/recipe.model';
   styleUrls: ['./recipes-page.component.css']
 })
 export class RecipesPageComponent implements OnInit {
+  public ingredientList: Ingredients;
   public editRecipeForm: FormGroup;
+  public showProductList = true;
+  private selectedProduct: Product;
   public recipe$: Observable<Recipe>;
+  public products$: Observable<Product[]>;
   public edit$ = new BehaviorSubject(false);
   private readonly _recipesJSON = 'assets/recipes-mock.json';
+  private readonly _productsJSON = 'assets/products-mock.json';
 
   constructor(
     private route: ActivatedRoute,
@@ -32,13 +39,27 @@ export class RecipesPageComponent implements OnInit {
             return recipes.find((rec: Recipe) => rec.name === recipesName);
           }),
           tap((r: Recipe) => {
+            this.ingredientList = r.ingredients;
             this.editRecipeForm = new FormGroup({
-              name: new FormControl(r.name, Validators.required)
+              name: new FormControl(r.name, Validators.required),
+              ingredients: new FormControl(r.ingredients, Validators.required),
+              ingredientName: new FormControl('', [Validators.required]),
+              ingredientBrand: new FormControl(''),
+              ingredientAmount: new FormControl({ value: null, disabled: this.showProductList }, [Validators.required, Validators.min(1)])
             });
+
+            this.products$ = this.editRecipeForm.controls.ingredientName.valueChanges.pipe(
+              switchMap((searchWord: string) => iif(
+                () => !!searchWord.trim(),
+                this.findProducts(searchWord),
+                of(new Array<Product>())
+              )
+              )
+            );
           })
         )
       })
-    )
+    );
   }
 
   close(): void {
@@ -51,8 +72,86 @@ export class RecipesPageComponent implements OnInit {
     this.edit$.next(true);
   }
 
-  save() {
-    console.log(`Want to save`);
+  updateRecipe(): void {
+    console.log(`Want to update Recipe`);
     this.edit$.next(false);
+    const caloriePer100gr = this.calculateCaloriePer100gr();
+    const macros = this.calculateMacronutrients();
+    this.recipe$ = of(Recipe.fromFormGroupValue({ ...this.editRecipeForm.value, caloriePer100gr, ...macros }));
+  }
+
+  removeIngredient(ingredientName: string, ingredientBrand: string): void {
+    console.log(this.ingredientList);
+    console.log(`Want to remove ${ingredientName}, ${ingredientBrand}`);
+    this.ingredientList = this.ingredientList.filter((ingredient: Ingredient) => {
+      console.log(`${ingredient.name} ${ingredient.brand} ${ingredient.name !== ingredientName && ingredient.brand !== ingredientBrand}`);
+      return ingredient.name !== ingredientName && ingredient.brand !== ingredientBrand;
+    });
+    console.log(this.ingredientList);
+    this.editRecipeForm.controls.ingredients.setValue(this.ingredientList);
+  }
+
+  addIngredient(): void {
+    this.ingredientList.push({
+      name: this.editRecipeForm.controls.ingredientName.value,
+      brand: this.editRecipeForm.controls.ingredientBrand.value,
+      amount: this.editRecipeForm.controls.ingredientAmount.value,
+      caloriePer100gr: this.selectedProduct.caloriePer100gr,
+      carbohydratesPer100gr: this.selectedProduct.carbohydratesPer100gr,
+      fatPer100gr: this.selectedProduct.fatPer100gr,
+      proteinPer100gr: this.selectedProduct.proteinPer100gr
+    });
+    this.editRecipeForm.controls.ingredientName.reset('');
+    this.editRecipeForm.controls.ingredientBrand.reset();
+    this.editRecipeForm.controls.ingredientAmount.reset();
+  }
+
+  selectProduct(product: Product): void {
+    this.selectedProduct = product;
+    this.editRecipeForm.controls.ingredientName.setValue(product.name);
+    this.editRecipeForm.controls.ingredientBrand.setValue(product.brand);
+    this.editRecipeForm.controls.ingredientAmount.enable({ onlySelf: true });
+  }
+
+  private calculateCaloriePer100gr(): number {
+    let totalCalorie = 0;
+    let totalAmount = 0;
+    this.ingredientList.forEach(({ caloriePer100gr, amount }) => {
+      totalCalorie += caloriePer100gr * amount;
+      totalAmount += amount;
+    });
+    return totalCalorie / totalAmount;
+  }
+
+  private calculateMacronutrients(): Macronutrients {
+    let totalProt = 0;
+    let totalCarb = 0;
+    let totalFat = 0;
+    let totalAmount = 0;
+    this.ingredientList.forEach(({ amount, proteinPer100gr, carbohydratesPer100gr, fatPer100gr }) => {
+      totalCarb += carbohydratesPer100gr * amount;
+      totalFat += fatPer100gr * amount;
+      totalProt += proteinPer100gr * amount;
+      totalAmount += amount;
+    });
+    return {
+      carbohydratesPer100gr: totalCarb / totalAmount,
+      fatPer100gr: totalFat / totalAmount,
+      proteinPer100gr: totalProt / totalAmount
+    };
+  }
+
+  private findProducts(searchWord: string): Observable<Product[]> {
+    return this.http.get<Product[]>(this._productsJSON).pipe(
+      map(products => products.filter((product: Product) => product.name.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase()))),
+      tap((products: Product[]) => {
+        const currentName = this.editRecipeForm.controls.ingredientName.value;
+        if (products.filter((p: Product) => p.name === currentName).length === 0) {
+          this.showProductList = true;
+        } else {
+          this.showProductList = false;
+        }
+      })
+    );
   }
 }

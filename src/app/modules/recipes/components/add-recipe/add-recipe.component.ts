@@ -71,7 +71,7 @@ export class AddRecipeComponent implements OnInit {
     this.ingredientList = this.ingredientList.filter((ingredient: Ingredient) => {
       return ingredient.name !== ingredientName && ingredient.brand !== ingredientBrand;
     });
-    this.recipeForm.controls.ingredients.setValue(this.ingredientList)
+    this.recipeForm.controls.ingredients.setValue(this.ingredientList);
   }
 
   addNewRecipe(): void {
@@ -121,7 +121,7 @@ export class AddRecipeComponent implements OnInit {
     };
   }
 
-  private findProducts(searchWord: string) {
+  private findProducts(searchWord: string): Observable<Product[]> {
     return this.http.get<Product[]>(this._productsJSON).pipe(
       map(products => products.filter((product: Product) => product.name.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase()))),
       tap((products: Product[]) => {
