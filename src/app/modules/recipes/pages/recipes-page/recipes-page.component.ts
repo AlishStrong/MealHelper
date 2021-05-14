@@ -81,13 +81,9 @@ export class RecipesPageComponent implements OnInit {
   }
 
   removeIngredient(ingredientName: string, ingredientBrand: string): void {
-    console.log(this.ingredientList);
-    console.log(`Want to remove ${ingredientName}, ${ingredientBrand}`);
     this.ingredientList = this.ingredientList.filter((ingredient: Ingredient) => {
-      console.log(`${ingredient.name} ${ingredient.brand} ${ingredient.name !== ingredientName && ingredient.brand !== ingredientBrand}`);
-      return ingredient.name !== ingredientName && ingredient.brand !== ingredientBrand;
+      return !(ingredient.name === ingredientName && ingredient.brand === ingredientBrand);
     });
-    console.log(this.ingredientList);
     this.editRecipeForm.controls.ingredients.setValue(this.ingredientList);
   }
 

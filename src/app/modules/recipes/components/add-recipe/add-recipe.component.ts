@@ -69,7 +69,7 @@ export class AddRecipeComponent implements OnInit {
 
   removeIngredient(ingredientName: string, ingredientBrand: string): void {
     this.ingredientList = this.ingredientList.filter((ingredient: Ingredient) => {
-      return ingredient.name !== ingredientName && ingredient.brand !== ingredientBrand;
+      return !(ingredient.name === ingredientName && ingredient.brand === ingredientBrand);
     });
     this.recipeForm.controls.ingredients.setValue(this.ingredientList);
   }
