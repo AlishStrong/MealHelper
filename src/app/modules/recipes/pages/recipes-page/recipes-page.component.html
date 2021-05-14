@@ -19,6 +19,41 @@
         </td>
       </tr>
       <tr>
+        <td colspan="2">Nutrition info (per 100 g)</td>
+      </tr>
+      <tr>
+        <td>
+          Calories
+        </td>
+        <td>
+          {{recipe.caloriePer100gr | number: '1.1-2'}} g
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Protein
+        </td>
+        <td>
+          {{recipe.proteinPer100gr | number: '1.1-2'}} g
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Carbohydrates
+        </td>
+        <td>
+          {{recipe.carbohydratesPer100gr | number: '1.1-2'}} g
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Fat
+        </td>
+        <td>
+          {{recipe.fatPer100gr | number: '1.1-2'}} g
+        </td>
+      </tr>
+      <tr>
         <td><button (click)="close()">Close</button></td>
         <td><button (click)="edit()">Edit</button></td>
       </tr>
@@ -101,6 +136,3 @@
     </fieldset>
   </form>
 </div>
-
-<br><br>
-{{ recipe$ | async | json }}
