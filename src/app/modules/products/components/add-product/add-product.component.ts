@@ -14,6 +14,7 @@ export class AddProductComponent implements OnInit {
   productForm = new FormGroup({
     name: new FormControl('', Validators.required),
     brand: new FormControl('', Validators.required),
+    ean: new FormControl(),
     caloriePer100gr: new FormControl(0, [Validators.required, Validators.min(0)]),
     proteinPer100gr: new FormControl(0, [Validators.max(100), Validators.min(0)]),
     carbohydratesPer100gr: new FormControl(0, [Validators.max(100), Validators.min(0)]),
@@ -32,6 +33,7 @@ export class AddProductComponent implements OnInit {
     this.productForm.reset({
       name: '',
       brand: '',
+      ean: '',
       caloriePer100gr: 0,
       proteinPer100gr: 0,
       carbohydratesPer100gr: 0,
