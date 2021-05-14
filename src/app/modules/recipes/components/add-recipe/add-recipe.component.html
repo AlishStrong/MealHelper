@@ -67,6 +67,15 @@
     </fieldset>
     <br>
 
+    <label for="portionsControl">Number of portions</label><br>
+    <input type="number"
+           min="1"
+           autocomplete="off"
+           name="portions"
+           id="portionsControl"
+           formControlName="portions"><br>
+    <br>
+
     <button type="submit"
             [disabled]="recipeForm.controls.name.invalid || ingredientList.length < 1">Save the recipe</button>
     <button type="button"

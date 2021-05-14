@@ -27,6 +27,7 @@ export class AddRecipeComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router) {
     this.recipeForm = new FormGroup({
       name: new FormControl('', Validators.required),
+      portions: new FormControl(),
       ingredients: new FormControl(this.ingredientList, Validators.required),
       ingredientName: new FormControl('', [Validators.required]),
       ingredientBrand: new FormControl(''),

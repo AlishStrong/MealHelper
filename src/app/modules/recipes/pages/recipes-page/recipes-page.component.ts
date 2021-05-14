@@ -6,7 +6,7 @@ import { BehaviorSubject, iif, Observable, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { Macronutrients } from 'src/app/shared/models/food.model';
 import { Product } from 'src/app/shared/models/product.model';
-import { Ingredient, Ingredients, Recipe } from 'src/app/shared/models/recipe.model';
+import { Ingredient, Ingredients, Portion, Recipe } from 'src/app/shared/models/recipe.model';
 
 @Component({
   selector: 'app-recipes-page',
@@ -42,6 +42,7 @@ export class RecipesPageComponent implements OnInit {
             this.ingredientList = r.ingredients;
             this.editRecipeForm = new FormGroup({
               name: new FormControl(r.name, Validators.required),
+              portions: new FormControl(r.portions),
               ingredients: new FormControl(r.ingredients, Validators.required),
               ingredientName: new FormControl('', [Validators.required]),
               ingredientBrand: new FormControl(''),
@@ -60,6 +61,7 @@ export class RecipesPageComponent implements OnInit {
         )
       })
     );
+
   }
 
   close(): void {
@@ -134,6 +136,21 @@ export class RecipesPageComponent implements OnInit {
       carbohydratesPer100gr: totalCarb / totalAmount,
       fatPer100gr: totalFat / totalAmount,
       proteinPer100gr: totalProt / totalAmount
+    };
+  }
+
+  getPortion(recipe: Recipe): Portion {
+    const amount = recipe.ingredients.map((ingr) => ingr.amount).reduce((prev, curr) => prev + curr) / recipe.portions;
+    const calories = amount * recipe.caloriePer100gr / 100;
+    const protein = amount * recipe.proteinPer100gr / 100;
+    const carbohydrates = amount * recipe.carbohydratesPer100gr / 100;
+    const fat = amount * recipe.fatPer100gr / 100;
+    return {
+      amount,
+      calories,
+      protein,
+      carbohydrates,
+      fat
     };
   }
 

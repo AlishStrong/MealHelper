@@ -1,64 +1,87 @@
 <p>recipes-page works!</p>
 <div *ngIf="(recipe$ | async) as recipe">
   <!-- Show Recipe table -->
-  <table *ngIf="!(edit$ | async)">
-    <tbody>
-      <tr>
-        <td>Name: </td>
-        <td>{{recipe.name}}</td>
-      </tr>
-      <tr>
-        <td colspan="2">Ingredients</td>
-      </tr>
-      <tr *ngFor="let ingr of ingredientList">
-        <td>
-          {{ingr.name}}
-        </td>
-        <td>
-          {{ingr.amount}} g
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2">Nutrition info (per 100 g)</td>
-      </tr>
-      <tr>
-        <td>
-          Calories
-        </td>
-        <td>
-          {{recipe.caloriePer100gr | number: '1.1-2'}} g
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Protein
-        </td>
-        <td>
-          {{recipe.proteinPer100gr | number: '1.1-2'}} g
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Carbohydrates
-        </td>
-        <td>
-          {{recipe.carbohydratesPer100gr | number: '1.1-2'}} g
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Fat
-        </td>
-        <td>
-          {{recipe.fatPer100gr | number: '1.1-2'}} g
-        </td>
-      </tr>
-      <tr>
-        <td><button (click)="close()">Close</button></td>
-        <td><button (click)="edit()">Edit</button></td>
-      </tr>
-    </tbody>
-  </table>
+  <div *ngIf="!(edit$ | async)">
+    <!-- Ingredient composition table -->
+    <table>
+      <tbody>
+        <tr>
+          <td>Name: </td>
+          <td>{{recipe.name}}</td>
+        </tr>
+        <tr>
+          <td colspan="2">Ingredients</td>
+        </tr>
+        <tr *ngFor="let ingr of ingredientList">
+          <td>
+            {{ingr.name}}
+          </td>
+          <td>
+            {{ingr.amount}} g
+          </td>
+        </tr>
+        <tr>
+          <td><button (click)="close()">Close</button></td>
+          <td><button (click)="edit()">Edit</button></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Nutrition info -->
+    <table *ngIf="getPortion(recipe) as prtn">
+      <tbody>
+        <tr>
+          <td>Nutrition info</td>
+          <td>per 100 g</td>
+          <td>per portion ({{prtn.amount}} g)</td>
+        </tr>
+        <tr>
+          <td>
+            Calories
+          </td>
+          <td>
+            {{recipe.caloriePer100gr | number: '1.1-2'}} g
+          </td>
+          <td>
+            {{prtn.calories | number: '1.1-2'}} g
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Protein
+          </td>
+          <td>
+            {{recipe.proteinPer100gr | number: '1.1-2'}} g
+          </td>
+          <td>
+            {{prtn.protein | number: '1.1-2'}} g
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Carbohydrates
+          </td>
+          <td>
+            {{recipe.carbohydratesPer100gr | number: '1.1-2'}} g
+          </td>
+          <td>
+            {{prtn.carbohydrates | number: '1.1-2'}} g
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Fat
+          </td>
+          <td>
+            {{recipe.fatPer100gr | number: '1.1-2'}} g
+          </td>
+          <td>
+            {{prtn.fat | number: '1.1-2'}} g
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   <!-- Edit Recipe table -->
   <form *ngIf="edit$ | async"
@@ -72,6 +95,14 @@
              name="name"
              id="nameControl"
              formControlName="name"><br>
+
+      <label for="nameControl">Number of portions</label><br>
+      <input type="number"
+             autocomplete="off"
+             name="portions"
+             id="portionsControl"
+             min="1"
+             formControlName="portions"><br>
 
       <fieldset>
         <legend>Ingredients</legend>

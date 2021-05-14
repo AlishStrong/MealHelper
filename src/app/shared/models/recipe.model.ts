@@ -5,6 +5,14 @@ export interface Ingredient extends Food {
   brand?: string;
 }
 
+export interface Portion {
+  amount: number;
+  calories: number;
+  protein: number;
+  carbohydrates: number;
+  fat: number;
+}
+
 export interface Ingredients extends Array<Ingredient> { }
 
 export class Recipe implements Food {
@@ -15,6 +23,7 @@ export class Recipe implements Food {
     public proteinPer100gr = 0,
     public carbohydratesPer100gr = 0,
     public fatPer100gr = 0,
+    public portions = 1,
     public steps = new Map<number, string>()
   ) { }
 
@@ -26,6 +35,7 @@ export class Recipe implements Food {
       value.proteinPer100gr ? value.proteinPer100gr : 0,
       value.carbohydratesPer100gr ? value.carbohydratesPer100gr : 0,
       value.fatPer100gr ? value.fatPer100gr : 0,
+      value.portions,
       value.steps ? value.steps : new Map<number, string>()
     );
   }

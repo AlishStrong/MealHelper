@@ -34,7 +34,8 @@
     "proteinPer100gr": 11.3,
     "carbohydratesPer100gr": 22.114285714285714,
     "fatPer100gr": 5.25,
-    "steps": {}
+    "steps": {},
+    "portions": 4
   },
   {
     "name": "Greek salad",
@@ -89,6 +90,7 @@
     "proteinPer100gr": 4.443692307692308,
     "carbohydratesPer100gr": 1.9630769230769232,
     "fatPer100gr": 7.005230769230769,
-    "steps": {}
+    "steps": {},
+    "portions": 4
   }
 ]
