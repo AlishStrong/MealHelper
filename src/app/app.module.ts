@@ -1,12 +1,14 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { AngularFireModule, FirebaseOptionsToken } from '@angular/fire';
+import { BrowserModule } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
+import { firebaseApiKey } from 'src/environments/firebase-apikey';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeModule } from './modules/home/home.module';
 import { ProductsModule } from './modules/products/products.module';
-import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { RecipesModule } from './modules/recipes/recipes.module';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -18,9 +20,12 @@ import { RecipesModule } from './modules/recipes/recipes.module';
     AppRoutingModule,
     HomeModule,
     ProductsModule,
-    RecipesModule
+    RecipesModule,
+    AngularFireModule
   ],
-  providers: [],
+  providers: [
+    { provide: FirebaseOptionsToken, useValue: {...environment.firebaseConfig, ...firebaseApiKey} }
+  ],
   bootstrap: [AppComponent],
   exports: [NavbarComponent]
 })

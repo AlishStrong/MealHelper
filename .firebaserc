@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "mealhelper-2ff19"
+  },
+  "targets": {
+    "mealhelper-2ff19": {
+      "hosting": {
+        "web-app": [
+          "meal-helper-web"
+        ]
+      }
+    }
+  }
+}
