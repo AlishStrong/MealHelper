@@ -10,11 +10,13 @@ import { HomeModule } from './modules/home/home.module';
 import { ProductsModule } from './modules/products/products.module';
 import { RecipesModule } from './modules/recipes/recipes.module';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { LoginComponent } from './shared/components/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
