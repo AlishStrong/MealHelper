@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { AngularFireModule, FirebaseOptionsToken } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
 import { firebaseApiKey } from 'src/environments/firebase-apikey';
@@ -9,8 +10,8 @@ import { AppComponent } from './app.component';
 import { HomeModule } from './modules/home/home.module';
 import { ProductsModule } from './modules/products/products.module';
 import { RecipesModule } from './modules/recipes/recipes.module';
-import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { LoginComponent } from './shared/components/login/login.component';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { LoginComponent } from './shared/components/login/login.component';
     ProductsModule,
     RecipesModule,
     AngularFireModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    ReactiveFormsModule
   ],
   providers: [
     { provide: FirebaseOptionsToken, useValue: {...environment.firebaseConfig, ...firebaseApiKey} }

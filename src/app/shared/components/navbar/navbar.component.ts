@@ -1,4 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import * as firebase from 'firebase';
+import { Observable } from 'rxjs';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,10 +10,16 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavbarComponent implements OnInit {
-
-  constructor() { }
+  currentUser$: Observable<firebase.User>;
+  
+  constructor(private auth: AuthService) {
+    this.currentUser$ = auth.user$;
+  }
 
   ngOnInit() {
   }
 
+  logout() {
+    this.auth.logout();
+  }
 }

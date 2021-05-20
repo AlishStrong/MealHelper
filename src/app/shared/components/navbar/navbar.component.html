@@ -1,16 +1,21 @@
 <nav>
-    <ul>
-        <li>
-            <a [routerLinkActive]="['active']" [routerLink]="['home']">Home</a>
-        </li>
-        <li>
-            <a [routerLinkActive]="['active']" [routerLink]="['products']">Products</a>
-        </li>
-        <li>
-            <a [routerLinkActive]="['active']" [routerLink]="['recipes']">Recipes</a>
-        </li>
-        <li>
-          <a [routerLinkActive]="['active']" [routerLink]="['login']">Login</a>
-        </li>
-    </ul>
+  <ul>
+    <li>
+      <a [routerLinkActive]="['active']" [routerLink]="['home']">Home</a>
+    </li>
+    <li>
+      <a [routerLinkActive]="['active']" [routerLink]="['products']"
+        >Products</a
+      >
+    </li>
+    <li>
+      <a [routerLinkActive]="['active']" [routerLink]="['recipes']">Recipes</a>
+    </li>
+    <li *ngIf="!(currentUser$ | async)?.uid">
+      <a [routerLinkActive]="['active']" [routerLink]="['login']">Login</a>
+    </li>
+    <li *ngIf="(currentUser$ | async)?.uid">
+      <a style="cursor: pointer" (click)="logout()">Log out</a>
+    </li>
+  </ul>
 </nav>

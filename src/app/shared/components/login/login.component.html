@@ -1,1 +1,26 @@
 <p>login works!</p>
+<form [formGroup]="loginForm" (ngSubmit)="signin()">
+  <fieldset>
+    <legend>Log in</legend>
+    <label for="emailControl">Email</label><br />
+    <input
+      type="email"
+      name="email"
+      id="emailControl"
+      formControlName="email"
+      placeholder="Your e-mail..."
+    /><br />
+
+    <label for="passwordControl">Password</label><br />
+    <input
+      type="password"
+      name="password"
+      id="passwordControl"
+      formControlName="password"
+      placeholder="Your password..."
+    /><br />
+
+    <button type="submit" [disabled]="!loginForm.valid">Sign in</button>
+    <button type="button" (click)="cancel()">Cancel</button>
+  </fieldset>
+</form>

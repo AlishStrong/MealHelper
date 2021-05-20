@@ -15,13 +15,8 @@ export class AuthService {
     this.authState$ = afAuth.authState;
    }
 
-  login(email: string, password: string) {
-    this.afAuth.auth.signInWithEmailAndPassword(email, password)
-    .then((uc: firebase.auth.UserCredential) => {
-      console.log(`User with UID ${uc.user.uid} has logged in`);
-    })
-    .catch(console.error)
-    .finally(() => console.log(`AuthService.login(${email}, ${password}) finished`));
+  login(email: string, password: string): Promise<firebase.auth.UserCredential> {
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
 
   logout() {
