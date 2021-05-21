@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { AngularFireModule, FirebaseOptionsToken } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
@@ -30,7 +31,8 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
     ReactiveFormsModule
   ],
   providers: [
-    { provide: FirebaseOptionsToken, useValue: {...environment.firebaseConfig, ...firebaseApiKey} }
+    { provide: FirebaseOptionsToken, useValue: {...environment.firebaseConfig, ...firebaseApiKey} },
+    AngularFireAuthGuard
   ],
   bootstrap: [AppComponent],
   exports: [NavbarComponent]
