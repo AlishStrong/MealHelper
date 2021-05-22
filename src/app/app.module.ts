@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeModule } from './modules/home/home.module';
 import { ProductsModule } from './modules/products/products.module';
+import { ProfileModule } from './modules/profile/profile.module';
 import { RecipesModule } from './modules/recipes/recipes.module';
 import { LoginComponent } from './shared/components/login/login.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
@@ -28,7 +29,8 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
     RecipesModule,
     AngularFireModule,
     AngularFireAuthModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ProfileModule
   ],
   providers: [
     { provide: FirebaseOptionsToken, useValue: {...environment.firebaseConfig, ...firebaseApiKey} },

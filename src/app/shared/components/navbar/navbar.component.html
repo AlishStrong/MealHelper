@@ -11,6 +11,9 @@
     <li>
       <a [routerLinkActive]="['active']" [routerLink]="['recipes']">Recipes</a>
     </li>
+    <li *ngIf="(currentUser$ | async)?.uid">
+      <a [routerLinkActive]="['active']" [routerLink]="['profile']">Profile</a>
+    </li>
     <li *ngIf="!(currentUser$ | async)?.uid">
       <a [routerLinkActive]="['active']" [routerLink]="['login']">Login</a>
     </li>
