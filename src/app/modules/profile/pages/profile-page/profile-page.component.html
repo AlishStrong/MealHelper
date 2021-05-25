@@ -1,1 +1,37 @@
 <p>profile-page works!</p>
+<div *ngIf="userForm$ | async as userForm">
+  <form [formGroup]="userForm" (ngSubmit)="save(userForm.value)">
+    <table>
+      <fieldset [disabled]="!(edit$ | async)">
+        <tr>
+          <td><label for="displayNameControl">Name</label></td>
+          <td>
+            <input
+              type="text"
+              name="displayName"
+              id="displayNameControl"
+              formControlName="displayName"
+              placeholder="Your name..."
+            />
+          </td>
+        </tr>
+        <tr>
+          <td><label for="emailControl">E-mail</label></td>
+          <td>
+            <input
+              type="email"
+              name="email"
+              id="emailControl"
+              formControlName="email"
+            />
+          </td>
+        </tr>
+      </fieldset>
+      <button type="button" *ngIf="!edit" (click)="editProfile()">Edit</button>
+      <button type="submit" *ngIf="edit" [disabled]="!userForm.valid">
+        Save
+      </button>
+      <button type="button" *ngIf="edit" (click)="cancel()">Cancel</button>
+    </table>
+  </form>
+</div>

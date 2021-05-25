@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 import * as firebase from 'firebase';
 import { Observable } from 'rxjs';
 
@@ -8,12 +9,10 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
   public user$: Observable<firebase.User>;
-  public authState$: Observable<firebase.User>;
 
-  constructor(private afAuth: AngularFireAuth) {
+  constructor(private afAuth: AngularFireAuth, private router: Router) {
     this.user$ = afAuth.user;
-    this.authState$ = afAuth.authState;
-   }
+  }
 
   login(email: string, password: string): Promise<firebase.auth.UserCredential> {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password);
@@ -21,6 +20,11 @@ export class AuthService {
 
   logout() {
     this.afAuth.auth.signOut()
+    .then((_) => {
+      if (this.router.url.includes('profile')) {
+        this.router.navigate(['']);
+      }
+    })
     .catch(console.error)
     .finally(() => console.log(`User has signed out`))
   }
